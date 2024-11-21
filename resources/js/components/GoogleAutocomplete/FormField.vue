@@ -52,12 +52,15 @@ export default {
 
             return this.__('nga_search');
         },
+        groupId () {
+            return this._.parent.uid
+        },
     },
     methods: {
         clear() {
             this.$refs.searchField.$refs.autocomplete.value = '';
             this.value = '';
-            Nova.$emit('address-metadata-clear');
+            Nova.$emit('address-metadata-clear-' + this.groupId);
         },
         getAddressData(addressData, placeResultData) {
             // Save current data address as a string
@@ -91,7 +94,7 @@ export default {
                 }
             });
 
-            Nova.$emit('address-metadata-update', {
+            Nova.$emit('address-metadata-update-' + this.groupId, {
                 attribute: this.field.attribute,
                 ...retrievedAddress,
             });

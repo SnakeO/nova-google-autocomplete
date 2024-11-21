@@ -1,6 +1,6 @@
 <?php
 
-namespace YieldStudio\NovaGoogleAutocomplete;
+namespace SnakeO\NovaGoogleAutocomplete;
 
 use Laravel\Nova\Fields\Field;
 

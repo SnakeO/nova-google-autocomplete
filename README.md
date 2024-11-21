@@ -12,13 +12,13 @@ Fork from [emilianotisato/nova-google-autocomplete-field](https://github.com/emi
 You can install the package in to a Laravel app that uses Nova via composer:
 
 ```bash
-composer require yieldstudio/nova-google-autocomplete
+composer require snakeo/nova-google-autocomplete
 ```
 
 Now publish config and localization files:
 
 ```shell
-php artisan vendor:publish --provider="YieldStudio\NovaGoogleAutocomplete\FieldServiceProvider"
+php artisan vendor:publish --provider="SnakeO\NovaGoogleAutocomplete\FieldServiceProvider"
 ```
 
 Create an app and enable Places API and create credentials to get your API key
@@ -35,7 +35,7 @@ NOVA_GOOGLE_AUTOCOMPLETE_API_KEY=############################
 Add the use declaration to your resource and use the fields:
 
 ```php
-use YieldStudio\NovaGoogleAutocomplete\GoogleAutocomplete;
+use SnakeO\NovaGoogleAutocomplete\GoogleAutocomplete;
 // ....
 
 GoogleAutocomplete::make('Address'),
@@ -54,8 +54,8 @@ GoogleAutocomplete::make('Address')
 You can access other parameter like `latitude, longitude, street_number, route, locality, administrative_area_level_1, country, postal_code`, along with everything available in the - every field present in the [PlaceResult object](https://developers.google.com/maps/documentation/javascript/reference/#PlaceResult)
 
 ```php
-use YieldStudio\NovaGoogleAutocomplete\AddressMetadata;
-use YieldStudio\NovaGoogleAutocomplete\GoogleAutocomplete;
+use SnakeO\NovaGoogleAutocomplete\AddressMetadata;
+use SnakeO\NovaGoogleAutocomplete\GoogleAutocomplete;
 
 // Now this address field will search and store the address as a string, but also made available the values in the withValues array
 GoogleAutocomplete::make('Address')->withValues(['latitude', 'longitude']),
@@ -75,8 +75,8 @@ By default, the formatted address will be stored on the property provided in the
 
 
 ```php
-use YieldStudio\NovaGoogleAutocomplete\AddressMetadata;
-use YieldStudio\NovaGoogleAutocomplete\GoogleAutocomplete;
+use SnakeO\NovaGoogleAutocomplete\AddressMetadata;
+use SnakeO\NovaGoogleAutocomplete\GoogleAutocomplete;
 
 // Formatted address will not be stored
 GoogleAutocomplete::make('Address')->withValues(['latitude', 'longitude'])->dontStore(),
@@ -91,8 +91,8 @@ AddressMetadata::make('long')->fromValue('longitude'),
 If you want to concatenate certain elements of the geocoded object that is returned by Google, using `{{` and `}}`, wrap the key like you would above; like so:
 
 ```php
-use YieldStudio\NovaGoogleAutocomplete\AddressMetadata;
-use YieldStudio\NovaGoogleAutocomplete\GoogleAutocomplete;
+use SnakeO\NovaGoogleAutocomplete\AddressMetadata;
+use SnakeO\NovaGoogleAutocomplete\GoogleAutocomplete;
 
 GoogleAutocomplete::make('Address')->withValues(['latitude', 'longitude']),
 
@@ -110,7 +110,7 @@ So the value that would be rendered within the coordinates input would be someth
 If you would like to use the **long_name** version of the geocoded object (Kansas versus KS), you can define the `GoogleAutocomplete` field values with dot notation followed with the name version you want to use; like so:
 
 ```php
-use YieldStudio\NovaGoogleAutocomplete\GoogleAutocomplete;
+use SnakeO\NovaGoogleAutocomplete\GoogleAutocomplete;
 
 GoogleAutocomplete::make('Address')
     ->withValues([
@@ -128,8 +128,8 @@ Which would return:
 You can change the type of places that are returned by the autocomplete using the placeType() method.  You can use any of the values listed at [https://developers.google.com/places/supported_types#table3](https://developers.google.com/places/supported_types#table3)
 
 ```php
-use YieldStudio\NovaGoogleAutocomplete\AddressMetadata;
-use YieldStudio\NovaGoogleAutocomplete\GoogleAutocomplete;
+use SnakeO\NovaGoogleAutocomplete\AddressMetadata;
+use SnakeO\NovaGoogleAutocomplete\GoogleAutocomplete;
 
 // This autocomplete field will return results that match a business name instead of address.
 // All the same address data is still stored.
