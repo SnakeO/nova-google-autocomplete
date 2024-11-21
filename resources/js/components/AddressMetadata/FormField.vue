@@ -28,12 +28,12 @@ export default {
     mixins: [FormField, HandlesValidationErrors],
     props: ['resourceName', 'resourceId', 'field'],
     mounted() {
-        Nova.$on('address-metadata-clear', () => {
+        Nova.$on('address-metadata-clear-' + this.groupId, () => {
             this.value = '';
         });
 
         if (this.field.asJson) {
-            Nova.$on('address-metadata-update', locationObject => {
+            Nova.$on('address-metadata-update-' + this.groupId, locationObject => {
                 this.value = JSON.stringify(locationObject);
             });
         } else if (this.field.addressValue.indexOf('{{') >= 0) {
@@ -52,7 +52,7 @@ export default {
                 }
             } while (match !== null);
 
-            Nova.$on('address-metadata-update', locationObject => {
+            Nova.$on('address-metadata-update-' + this.groupId, locationObject => {
                 if (this.checkIfFlexibleField(locationObject.attribute)) {
                     return;
                 }
@@ -72,7 +72,7 @@ export default {
                 this.value = addressValue;
             });
         } else {
-            Nova.$on('address-metadata-update', locationObject => {
+            Nova.$on('address-metadata-update-' + this.groupId, locationObject => {
                 if (this.checkIfFlexibleField(locationObject.attribute)) {
                     return;
                 }
@@ -80,6 +80,11 @@ export default {
                 this.value = locationObject[this.field.addressValue];
             });
         }
+    },
+    computed: {
+        groupId () {
+            return this._.parent.uid
+        },
     },
     methods: {
         setInitialValue() {
